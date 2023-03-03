@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - 3000:3000
+    networks:
+      - my-network-stream-app
+  
+  pocketbase:
+    container_name: pocketbase-stream-app
+    
+    image: ghcr.io/muchobien/pocketbase:latest
+    volumes:
+      - pocketbase-volume-stream-app:/app/pocketbase/pb_data
+    networks:
+      - my-network-stream-app
+    ports:
+      - 8090:8090
+
+networks:
+  my-network-stream-app:
+    
+    name: my-network-stream-app
+
+volumes:
+  pocketbase-volume-stream-app:
+    name: pocketbase-volume-stream-app
+      
